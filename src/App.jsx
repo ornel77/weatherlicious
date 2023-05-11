@@ -86,7 +86,7 @@ function App() {
   return (
     <>
       <h1 id="app_title">Weatherlicious</h1>
-      <div id="search_container">
+      <div id="main_content_container">
         <input
           id="search_bar"
           type="text"
