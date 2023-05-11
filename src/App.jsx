@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 // Hook
 function useDebounce(value, delay) {
@@ -26,7 +26,7 @@ function searchCharacters(city) {
   return fetch(
     `https://api.weatherapi.com/v1/current.json?key=af2a7d47095743febd975049231105&q=${city}&aqi=no`,
     {
-      method: 'GET',
+      method: "GET",
     }
   )
     .then((r) => r.json())
@@ -38,7 +38,7 @@ function searchCharacters(city) {
 }
 
 function App() {
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState("");
   // API search results
   const [results, setResults] = useState([]);
   const debouncedSearchTerm = useDebounce(city, 900);
@@ -81,21 +81,30 @@ function App() {
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   );
   console.log(results);
-  let time = results?.location?.localtime
-  let realTime = time?.split(' ') || ""
+  let time = results?.location?.localtime;
+  let realTime = time?.split(" ") || "";
   return (
     <>
-      <h1>weatherlicious</h1>
-
-      <input type='text' value={city} onChange={handleChange} />
-      {/* {isSearching && <div>Searching ...</div>} */}
-
-      <h2> {results?.current?.condition.text} </h2>
-      <img src={results?.current?.condition.icon} alt="" />
-      <h2> {results?.location?.name} </h2>
-      <h2> {results?.location?.country} </h2>
-      <h2> {results?.current?.temp_c}°C</h2>
-      <p> {realTime[1]} </p>
+      <h1 id="app_title">Weatherlicious</h1>
+      <div id="search_container">
+        <input
+          id="search_bar"
+          type="text"
+          value={city}
+          onChange={handleChange}
+        />
+        {/* {isSearching && <div>Searching ...</div>} */}
+        <h3 id="city_country_txt">
+          {" "}
+          {results?.location?.name}, {results?.location?.country}{" "}
+        </h3>
+        <div id="condition_container">
+        <h3 id="condition_txt"> {results?.current?.condition.text} </h3>
+        <img src={results?.current?.condition.icon} alt="" />
+        </div>
+        <h1> {results?.current?.temp_c}°C</h1>
+        <h3 id="time"> {realTime[1]} </h3>
+      </div>
     </>
   );
 }

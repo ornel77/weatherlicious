@@ -1,10 +1,97 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@font-face {
+  font-family: Ginger;
+  src: url(./fonts/Ginger.otf);
 }
 
-body {
-  background-color: rgb(64, 188, 213);
+@font-face {
+  font-family: NeueMontreal-regular;
+  src: url(./fonts/NeueMontreal-Regular.otf);
 }
+
+@font-face {
+  font-family: NeueMontreal-light;
+  src: url(./fonts/NeueMontreal-Light.otf);
+}
+
+@media screen and (max-width: 431px){
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(180.01deg, rgba(0, 0, 0, 0) 0.01%, rgba(12, 11, 11, 0.6) 73.95%, rgba(0, 0, 0, 0.6) 99.99%, rgba(0, 0, 0, 0.6) 99.99%), url(./assets/background.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  h1 {
+  color: white;
+  font-family: Ginger;
+  font-weight: 200;
+  font-size: 40px;
+  letter-spacing: 0.1em;
+  }
+
+  h3{
+    color: white;
+    font-family: NeueMontreal-regular;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  #app_title{
+    margin-top: 10vh;
+    width: 100vw;
+    text-align: center;
+  }
+
+  #search_container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+    align-items: center;
+    width: 100vw;
+    height: 50vh;
+  }
+
+  #search_bar{
+  background: rgba(217, 217, 217, 0.3);
+  border-radius: 20px;
+  border: none;
+  height: 3vh;
+  width: 70%;
+  color: white;
+  font-family: NeueMontreal-regular;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 2vh;
+  letter-spacing: 0.1em;
+  }
+
+  #city_country_txt{
+    opacity: 0.7;
+  }
+
+  #condition_container{
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+  }
+
+  #condition_txt{
+   width: 20vw;
+  }
+
+  #time{
+    margin-top: 1vh;
+    opacity: 0.7;
+  }
+}
+
 
