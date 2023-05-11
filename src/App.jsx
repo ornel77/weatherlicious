@@ -93,7 +93,8 @@ function App() {
       <h2> {results?.current?.condition.text} </h2>
       <img src={results?.current?.condition.icon} alt="" />
       <h2> {results?.location?.name} </h2>
-      <h2> {results?.location?.region} </h2>
+      <h2> {results?.location?.country} </h2>
+      <h2> {results?.current?.temp_c}°C</h2>
       <p> {realTime[1]} </p>
     </>
   );
