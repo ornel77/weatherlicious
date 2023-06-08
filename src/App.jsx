@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import mapFlag from "./assets/map-flag.png";
+import loupe from "./assets/loupe.svg";
 
 // Hook
 function useDebounce(value, delay) {
@@ -87,23 +89,30 @@ function App() {
     <>
       <h1 id="app_title">Weatherlicious</h1>
       <div id="main_content_container">
+        <div id="search_bar_container">
+        <img src={loupe} alt="loupe-svg" id="loupe"/>
         <input
           id="search_bar"
           type="text"
           value={city}
           onChange={handleChange}
         />
-        {/* {isSearching && <div>Searching ...</div>} */}
-        <h3 id="city_country_txt">
-          {" "}
-          {results?.location?.name}, {results?.location?.country}{" "}
-        </h3>
-        <div id="condition_container">
-        <h3 id="condition_txt"> {results?.current?.condition.text} </h3>
-        <img src={results?.current?.condition.icon} alt="" />
         </div>
-        <h1> {results?.current?.temp_c}°C</h1>
+        {/* {isSearching && <div>Searching ...</div>} */}
+        <div id="city_container" style={city === "" ? {opacity: "0"} : {opacity: 1}}>
+          <img id="map_flag" src={mapFlag}></img>
+          <h3 id="city_country_txt">
+            {" "}
+            {results?.location?.name}, {results?.location?.country}{" "}
+          </h3>
+        </div>
+        <div id="condition_container">
+          <h3 id="condition_txt"> {results?.current?.condition.text} </h3>
+          <img src={results?.current?.condition.icon} alt="" />
+        </div>
+        <h1 id="degree" style={city === "" ? {opacity: "0"} : {opacity: 1}}>{`${results?.current?.temp_c}°C`}</h1>
         <h3 id="time"> {realTime[1]} </h3>
+        <div id="map_container"></div>
       </div>
     </>
   );
