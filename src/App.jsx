@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import mapFlag from "./assets/map-flag.png";
 import loupe from "./assets/loupe.svg";
-
+import iphonePrototype from "./assets/iphone.png";
+import humanImg from "./assets/human.png"
 // Hook
 function useDebounce(value, delay) {
   // State and setters for debounced value
@@ -40,7 +41,7 @@ function searchCharacters(city) {
 }
 
 function App() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Paris");
   // API search results
   const [results, setResults] = useState([]);
   const debouncedSearchTerm = useDebounce(city, 900);
@@ -87,6 +88,11 @@ function App() {
   let realTime = time?.split(" ") || "";
   return (
     <>
+      <div id="background_box">
+      <img id="iphone_prototype" src={iphonePrototype} alt="iphone prototype for app viewer"/>
+      </div>
+      
+      <div id="iphone_body_container">
       <h1 id="app_title">Weatherlicious</h1>
       <div id="main_content_container">
         <div id="search_bar_container">
@@ -108,11 +114,12 @@ function App() {
         </div>
         <div id="condition_container">
           <h3 id="condition_txt"> {results?.current?.condition.text} </h3>
-          <img src={results?.current?.condition.icon} alt="" />
+          <img style={{background: "initial"}} src={results?.current?.condition.icon} alt="" />
         </div>
         <h1 id="degree" style={city === "" ? {opacity: "0"} : {opacity: 1}}>{`${results?.current?.temp_c}°C`}</h1>
         <h3 id="time"> {realTime[1]} </h3>
-        <div id="map_container"></div>
+        <img id="human_png" src={humanImg} alt="human logo"/>
+      </div>
       </div>
     </>
   );
