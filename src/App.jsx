@@ -86,6 +86,7 @@ function App() {
   console.log(results);
   let time = results?.location?.localtime;
   let realTime = time?.split(" ") || "";
+
   return (
     <>
       <div id="background_box">
