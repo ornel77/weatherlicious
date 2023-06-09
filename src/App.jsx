@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+// import ActivityWrapper from "./components/ActivityWrapper";
+import Activities from './components/Activities';
 
 // Hook
 function useDebounce(value, delay) {
@@ -26,7 +28,7 @@ function searchCharacters(city) {
   return fetch(
     `https://api.weatherapi.com/v1/current.json?key=af2a7d47095743febd975049231105&q=${city}&aqi=no`,
     {
-      method: "GET",
+      method: 'GET',
     }
   )
     .then((r) => r.json())
@@ -38,9 +40,10 @@ function searchCharacters(city) {
 }
 
 function App() {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState('');
   // API search results
   const [results, setResults] = useState([]);
+  const [condition, setCondition] = useState('');
   const debouncedSearchTerm = useDebounce(city, 900);
 
   // useEffect(() => {
@@ -53,10 +56,6 @@ function App() {
   // }, [city]);
 
   // API search function
-
-  const handleChange = (e) => {
-    setCity(e.target.value);
-  };
 
   // Searching status (whether there is pending API request)
   // const [isSearching, setIsSearching] = useState(false);
@@ -72,39 +71,47 @@ function App() {
         searchCharacters(debouncedSearchTerm).then((results) => {
           // setIsSearching(false);
           setResults(results);
+          setCondition(results?.current?.condition.text || '');
         });
       } else {
         setResults([]);
+        setCondition('');
         // setIsSearching(false);
       }
     },
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   );
-  console.log(results);
+
+  const handleChange = (e) => {
+    setCity(e.target.value);
+  };
+  // console.log(results);
   let time = results?.location?.localtime;
-  let realTime = time?.split(" ") || "";
+  let realTime = time?.split(' ') || '';
   return (
     <>
-      <h1 id="app_title">Weatherlicious</h1>
-      <div id="main_content_container">
+      <h1 id='app_title'>Weatherlicious</h1>
+      <div id='main_content_container'>
         <input
-          id="search_bar"
-          type="text"
+          id='search_bar'
+          type='text'
           value={city}
           onChange={handleChange}
         />
         {/* {isSearching && <div>Searching ...</div>} */}
-        <h3 id="city_country_txt">
-          {" "}
-          {results?.location?.name}, {results?.location?.country}{" "}
+        <h3 id='city_country_txt'>
+          {' '}
+          {results?.location?.name}, {results?.location?.country}{' '}
         </h3>
-        <div id="condition_container">
-        <h3 id="condition_txt"> {results?.current?.condition.text} </h3>
-        <img src={results?.current?.condition.icon} alt="" />
+        <div id='condition_container'>
+          <h3 id='condition_txt'> {results?.current?.condition.text} </h3>
+          <img src={results?.current?.condition.icon} alt='' />
         </div>
         <h1> {results?.current?.temp_c}°C</h1>
-        <h3 id="time"> {realTime[1]} </h3>
+        <h3 id='time'> {realTime[1]} </h3>
       </div>
+      {/* <ActivityWrapper condition={condition}/> */}
+      <Activities city={city} />
     </>
   );
 }
